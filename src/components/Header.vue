@@ -74,9 +74,9 @@ export default defineComponent({
 </script>
 
 <template>
-<header>
-  <nav>
-    <span>Lalessandra&amp;Nanaise</span>
+<header id="header">
+  <nav id="navbar">
+    <span id="logo-title">Lalessandra&amp;Nanaise</span>
     <span><RouterLink :to="home">Home</RouterLink></span>
     <DropdownMenu :dropdown-name="eventsName" :link-objects="eventsObjects"></DropdownMenu>
     <DropdownMenu :dropdown-name="blogsName" :link-objects="blogsObjects"></DropdownMenu>
@@ -86,5 +86,22 @@ export default defineComponent({
 </template>
 
 <style scoped>
+#header {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  width: 100vw;
+  position: sticky;
+  top:0;
+  overflow: hidden;
+}
 
+#logo-title {
+  font-size: 30px;
+  text-align: center;
+}
+
+#navbar {
+  width: 60%;
+}
 </style>
