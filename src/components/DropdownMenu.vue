@@ -24,8 +24,10 @@ export default defineComponent({
   <div class="dropdown">
     <button class="dropbtn">{{ dropdownName }}</button>
     <div class="dropdown-content">
-      <a v-if="linkObject.linkValue[0]"></a>
-      <RouterLink :to="linkObject.linkValue" v-for="linkObject in linkObjects">linkObject.linkName</RouterLink>
+      <span v-for="linkObject in linkObjects">
+        <a v-if="linkObject.linkType === 'a_link'" :href="linkObject.linkValue">{{ linkObject.linkName }}</a>
+        <RouterLink v-else-if="linkObject.linkType === 'r_link'" :to="linkObject.linkValue">{{ linkObject.linkName }}</RouterLink>
+      </span>
     </div>
   </div>
 </template>
