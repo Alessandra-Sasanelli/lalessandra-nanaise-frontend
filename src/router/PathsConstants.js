@@ -1,0 +1,7 @@
+export const PAST_EVENTS = "/past_events"
+export const UPCOMING_EVENTS = "/upcoming_events"
+export const GALLERY = "/gallery"
+export const HOME = "/"
+export const NANAS_BLOG = "/i_am_nana"
+export const LALES_BLOG = "/i_am_lale"
+export const SONG_LIST = "/song_list"

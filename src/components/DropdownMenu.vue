@@ -1,8 +1,12 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import { RouterLink } from "vue-router";
 
 export default defineComponent({
   name: "DropdownMenu",
+  components: {
+    RouterLink
+  },
   props: {
     dropdownName: {
       type: String,
@@ -20,7 +24,8 @@ export default defineComponent({
   <div class="dropdown">
     <button class="dropbtn">{{ dropdownName }}</button>
     <div class="dropdown-content">
-      <a :href="linkObject.linkValue" v-for="linkObject in linkObjects">linkObject.linkName</a>
+      <a v-if="linkObject.linkValue[0]"></a>
+      <RouterLink :to="linkObject.linkValue" v-for="linkObject in linkObjects">linkObject.linkName</RouterLink>
     </div>
   </div>
 </template>
