@@ -77,23 +77,44 @@ export default defineComponent({
 <header id="header">
   <nav id="navbar">
     <span id="logo-title">Lalessandra&amp;Nanaise</span>
-    <span><RouterLink :to="home">Home</RouterLink></span>
-    <DropdownMenu :dropdown-name="eventsName" :link-objects="eventsObjects"></DropdownMenu>
-    <DropdownMenu :dropdown-name="blogsName" :link-objects="blogsObjects"></DropdownMenu>
-    <DropdownMenu :dropdown-name="aboutName" :link-objects="aboutObjects"></DropdownMenu>
+    <div id="links">
+      <span><RouterLink :to="home">Home</RouterLink></span>
+      <DropdownMenu :drop-count="1" :dropdown-name="eventsName" :link-objects="eventsObjects"></DropdownMenu>
+      <DropdownMenu :drop-count="2" :dropdown-name="blogsName" :link-objects="blogsObjects"></DropdownMenu>
+      <DropdownMenu :drop-count="3" :dropdown-name="aboutName" :link-objects="aboutObjects"></DropdownMenu>
+    </div>
   </nav>
 </header>
 </template>
 
 <style scoped>
+
 #header {
-  display: flex;
-  flex-direction: row;
-  gap: 1px;
-  width: 100vw;
   position: sticky;
   top:0;
-  overflow: hidden;
+  width: 100vw;
+  padding-left: 1em;
+}
+
+#header, #navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 10;
+}
+
+#navbar {
+  justify-self: end;
+}
+
+#links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  z-index: 10;
+  padding-left: 1em;
 }
 
 #logo-title {

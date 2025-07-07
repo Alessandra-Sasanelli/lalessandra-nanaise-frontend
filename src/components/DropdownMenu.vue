@@ -1,13 +1,18 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
-import { RouterLink } from "vue-router";
+import { defineComponent, ref } from 'vue'
+import { BDropdown, BDropdownItem } from 'bootstrap-vue-next'
 
 export default defineComponent({
   name: "DropdownMenu",
   components: {
-    RouterLink
+    BDropdown,
+    BDropdownItem
   },
   props: {
+    dropCount : {
+      type: Number,
+      required: true
+    },
     dropdownName: {
       type: String,
       required: true
@@ -16,62 +21,61 @@ export default defineComponent({
       type: Array,
       required: true
     }
+  },
+  setup() {
+    const myDropdown = ref(null)
+
+    function showDropdown() {
+      myDropdown.value?.show()
+    }
+    function hideDropdown() {
+      myDropdown.value?.hide()
+    }
+
+    return { myDropdown, showDropdown, hideDropdown }
   }
 })
 </script>
 
 <template>
-  <div class="dropdown">
-    <button class="dropbtn">{{ dropdownName }}</button>
-    <div class="dropdown-content">
-      <span v-for="linkObject in linkObjects">
-        <a v-if="linkObject.linkType === 'a_link'" :href="linkObject.linkValue">{{ linkObject.linkName }}</a>
-        <RouterLink v-else-if="linkObject.linkType === 'r_link'" :to="linkObject.linkValue">{{ linkObject.linkName }}</RouterLink>
-      </span>
-    </div>
+  <div @mouseover="showDropdown" @mouseleave="hideDropdown">
+    <BDropdown no-caret
+               :auto-close="false"
+               ref="myDropdown1"
+               is-nav
+               :text="dropdownName">
+      <BDropdownItem v-for="(linkObject, i) in linkObjects"
+                     :key="linkObject.linkValue || i"
+                     :href="linkObject.linkValue">
+        {{ linkObject.linkName }}
+      </BDropdownItem>
+    </BDropdown>
   </div>
 </template>
 
 <style scoped>
-/* Dropdown Button */
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
+:deep(.dropdown > button) {
+  background-color: transparent !important;
+  border-radius: 0;
+  padding: 0;
+}
+
+:deep(.dropdown > button):hover{
+  text-decoration: underline #181818;
+}
+
+:deep(.dropdown > ul) {
   border: none;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
+:deep(.dropdown > ul li a) {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+:deep(.dropdown-item){
+  border-bottom: 1px solid #242424 !important;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
