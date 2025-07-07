@@ -53,7 +53,7 @@ const aboutObjects = [
 ]
 
 export default defineComponent({
-  name: "Header",
+  name: "NavBar",
   data() {
     return {
       "eventsName": eventsName,
